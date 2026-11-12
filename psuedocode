@@ -1,0 +1,85 @@
+Start
+  Initialize event_names = []
+  Initialize event_fees = []
+  Initialize event_seats = []
+
+  Function add_event(names, fees, seats)
+    Prompt user for name
+    If name is empty:
+      Display error and return
+    If name is already in names:
+      Display error (duplicate) and return
+
+    Try converting fee input to float
+    If conversion fails or fee < 0:
+      Display error and return
+
+    Try converting seats input to int
+    If conversion fails or seats <= 0:
+      Display error and return
+
+    Append name to names
+    Append fee to fees
+    Append seats to seats
+    Display success message
+  End Function
+
+  Function view_events(names, fees, seats)
+    If length of names is 0:
+      Display "No events available."
+      Return
+
+    Display header
+    For each index i from 0 to length(names) - 1:
+      Display index + 1, names[i], fees[i], seats[i]
+  End Function
+
+  Function register_seats(names, fees, seats)
+    If length of names is 0:
+      Display "No events available to register."
+      Return
+
+    Prompt user for target event name
+    If event name not in names:
+      Display error (event not found) and return
+
+    Get index i of event name
+    Prompt user for requested seats (qty)
+    Try converting qty to int
+    If conversion fails or qty <= 0:
+      Display error and return
+
+    If qty > seats[i]:
+      Display error (not enough seats) and return
+
+    Update seats[i] = seats[i] - qty
+    Calculate total_fee = fees[i] * qty
+
+    Display confirmation:
+      - Event Name
+      - Quantity Registered
+      - Unit Fee
+      - Total Fee
+  End Function
+
+  Function main()
+    While True:
+      Display Menu
+      Prompt for choice
+      Try converting choice to int
+      If choice == 1:
+        Call add_event()
+      Else If choice == 2:
+        Call view_events()
+      Else If choice == 3:
+        Call register_seats()
+      Else If choice == 4:
+        Display exit message
+        Break loop
+      Else:
+        Display invalid choice error
+    End While
+  End Function
+
+  Call main()
+Stop
